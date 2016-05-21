@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <title>Mad Meanderings</title>
+
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/madmeanderings.js') }}"></script>
+    {% endblock %}
+</head>
+
+<body>
+    <div class="navigation-wrap">
+        <div class="navigation">
+            <span style="vertical-align:middle;"></span>
+            <a href="#">ABOUT</a>
+            <a href="#">TRIPS</a>
+            <a href="#">RECENT</a>
+            <a href="#">SOMETHING</a>
+        </div>
+    </div>
+    <div class="global-wrap">
+        <div class="section-wrap">
+            <div class="section text-center">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" id="nav-logo">
+            </div>
+            <div class="section text-center">
+                this is a section
+            </div>
+
+            <div class="section text-center">
+                this is a section
+            </div>
+        </div>
+
+        <div class="footer text-center">
+            this is a footer<br>
+            <a href="https://www.instagram.com/mad_meanderings/">Mad Meanderings</a>
+        </div>
+    </div>
+</body>
+</html>

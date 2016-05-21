@@ -1,0 +1,74 @@
+body, html {
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation-wrap {
+    display:    block;
+    position:   fixed;
+    width:      100%;
+    z-index:    1000;
+    padding:    10px 0;
+    background-color: #fff5cc;
+}
+
+.navigation {
+    width:      1300px;
+    margin:     auto;
+    line-height: 20px;
+    font-size:  .8em;
+    font-family: "Pontano Sans", sans-serif;
+}
+
+#nav-logo {
+    margin-top: 50px;
+    height: 150px;
+}
+
+.navigation a {
+    margin: 0 10px;
+    vertical-align: middle;
+}
+
+.navigation a:link,
+.navigation a:visited,
+.navigation a:focus,
+.navigation a:active {
+    color: #000000;
+    text-decoration: none; 
+}
+
+.navigation a:hover {
+    color:  #505050;
+    cursor: pointer;
+}
+
+.global-wrap {
+    display:    block;
+    position:   relative;
+    top:        62px;
+    left:       0;
+    width:      1300px;
+    margin:     auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+.section {
+    display:    block;
+    position:   relative;
+    margin:     10px 0 25px 0;
+}
+
+.footer {
+    display:    block;
+    position:   relative;
+    padding:    15px 0;
+    width:      100%;
+    font-size:  0.8em;
+    background-color:   darkgray;
+}
