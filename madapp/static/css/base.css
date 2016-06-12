@@ -22,8 +22,15 @@ body, html {
     padding-bottom: 10px;
 }
 
-#nav-logo {
+.nav-logo-wrap {
     width: 100%;
+    text-align: center;
+    padding: 25px 0;
+}
+
+#nav-logo {
+    width: 500px;
+    margin: 0 auto;
 }
 
 .navigation {

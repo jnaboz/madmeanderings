@@ -28,7 +28,9 @@
     <div class="global-wrap">
         {% block navigation %}
 		<div class="navigation-wrap">
-            <img src="{{ url_for('static', filename='images/nav/navigation.svg') }}" id="nav-logo">
+			<div class="nav-logo-wrap">
+                <img src="{{ url_for('static', filename='images/nav/navigation.svg') }}" id="nav-logo">
+            </div>
 			<div class="navigation">
 				<span style="vertical-align:middle;"></span>
 				<div class="text-center" id="navigation-links">

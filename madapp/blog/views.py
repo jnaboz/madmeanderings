@@ -1,11 +1,11 @@
 from flask import render_template, Blueprint, url_for
 
-blog = Blueprint("blog", __name__, url_prefix=None)
+blog_bp = Blueprint("blog_bp", __name__, url_prefix=None)
 
-@blog.route("/")
+@blog_bp.route("/")
 def main():
     return render_template("blog/main.html")
 
-@blog.route("/about")
+@blog_bp.route("/about")
 def about():
     return render_template("blog/about.html")

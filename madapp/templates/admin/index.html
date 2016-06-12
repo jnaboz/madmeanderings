@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if not current_user.is_authenticated %}
+    You need to login to view this page
+    <div>
+        <a href="{{ url_for('security.login') }}">
+            <div class="button" style="display:inline-block;">
+                Login
+            </div>
+        </a>
+    </div>
+    {% else %}
+    LOGGED IN YO
+    {% endif %}
+{% endblock %}
