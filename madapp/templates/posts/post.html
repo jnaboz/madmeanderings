@@ -1,12 +1,14 @@
-{% extends "base.html" %}
+{%- extends "base.html" %}
 
-{% block content %}
+{%- block content %}
         <div class="section-wrap">
             <div class="section text-justify">
                 <div class="section-title"><span class="title-date">{{ post_data.post_date }}</span>{{ post_data.title }}</div>
 				<div class="section-content">
-                    {{ post_data.content }}
+                    {%- filter markdown %}
+                    {{- post_data.content }}
+                    {%- endfilter %}
 				</div>
             </div>
         </div>
-{% endblock %}
+{%- endblock %}

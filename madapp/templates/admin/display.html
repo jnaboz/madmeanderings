@@ -1,0 +1,56 @@
+{%- extends "base.html" %}
+
+{%- block navigation %}
+{%- include "admin/navbar.html" %}
+{%- endblock %}
+
+{%- block content %}
+    <div class="section-wrap">
+        {%- if not current_user.is_authenticated %}
+        You need to login to view this page
+        <div class="section">
+            <a href="{{ url_for('security.login') }}">
+                <div class="button" style="display:inline-block;">
+                    Login
+                </div>
+            </a>
+        </div>
+        {%- else %}
+        {%- block authenticated_content %}
+        <div class="section">
+            <div class="section-content">
+                <div class="form-wrap">
+                    <form action="" method="post">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    {%- for attr in attrs_order %}
+                                    <th>{{ attr|replace("_", " ")|capitalize() }}</th>
+                                    {%- endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%- for row in data %}
+                                <tr>
+                                    <td><input class="checkbox" type="checkbox" name="selected" value="{{ row['id'] }}"></td>
+                                    {%- for attr in attrs_order %}
+                                    <td>{{ row[attr] }}</td>
+                                    {%- endfor %}
+                                </tr>
+                                {%- endfor %}
+                            </tbody>
+                        </table>
+                        <div class="form-btn-wrap">
+                            <a class="submit-btn btn btn-primary" href="{{ admin_type }}/add">Add New</a>
+                            <input style="display:none;" name="btn" class="submit-btn btn btn-primary" id="delete" type="submit" value="Delete">
+                            <input style="display:none;" name="btn" class="submit-btn btn btn-primary" id="modify" type="submit" value="Modify">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {%- endblock %}
+        {%- endif %}
+    </div>
+{%- endblock %}

@@ -1,4 +1,5 @@
 {%- extends "base.html" %}
+{%- import "macros/macros.html" as macros %}
 
 {%- block navigation %}
 {%- include "admin/navbar.html" %}
@@ -8,7 +9,7 @@
     <div class="section-wrap">
         {%- if not current_user.is_authenticated %}
         You need to login to view this page
-        <div>
+        <div class="section">
             <a href="{{ url_for('security.login') }}">
                 <div class="button" style="display:inline-block;">
                     Login
@@ -16,7 +17,14 @@
             </a>
         </div>
         {%- else %}
-        LOGGED IN YO
+        {%- block authenticated_content %}
+        <div class="section">
+            <div class="section-content">
+                {%- call macros.render_form(admin_form, back_url=url_for(".admin_display", admin_type=admin_form._path), enctype=enctype) %}
+                {%- endcall %}
+            </div>
+        </div>
+        {%- endblock %}
         {%- endif %}
     </div>
 {%- endblock %}

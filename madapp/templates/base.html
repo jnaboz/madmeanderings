@@ -1,57 +1,42 @@
 <html lang="en">
 <head>
-    {% block head %}
+    {%- block head %}
     <meta charset="UTF-8">
     <title>{% block title %}Mad Meanderings{% endblock %}</title>
     <link rel='shortcut icon' href="{{ url_for('static', filename='images/mm.ico') }}" type="image/x-icon">
 
-    {% block fonts %}
+    {%- block fonts %}
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
-    {% endblock %}
+    {%- endblock %}
 
-    {% block css %}
+    {%- block css %}
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
-    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    {%- endblock %}
 
-    {% block js %}
+    {%- block js %}
     <!-- Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='js/global.js') }}"></script>
-    {% endblock %}
+    {%- endblock %}
 
-    {% endblock %}
+    {%- endblock %}
 </head>
 
 <body>
     <div class="global-wrap">
-        {% block navigation %}
-		<div class="navigation-wrap">
-			<div class="nav-logo-wrap">
-                <img src="{{ url_for('static', filename='images/nav/navigation.svg') }}" id="nav-logo">
-            </div>
-			<div class="navigation">
-				<span style="vertical-align:middle;"></span>
-				<div class="text-center" id="navigation-links">
-                    <a href="/"><img src="{{ url_for('static', filename='images/nav/home.svg') }}"></a>
-					<a href="/about">ABOUT</a>
-					<a href="/trips">TRIPS</a>
-					<a href="/posts">RECENT</a>
-					<a href="#">SOMETHING</a>
-                    <a href="https://www.instagram.com/mad_meanderings/" target="_"><img src="{{ url_for('static', filename='images/nav/instagram.svg') }}"></a>
-				</div>
-			</div>
-		</div>
-        {% endblock %}
+        {%- block navigation %}
+        {%- include "blog/navbar.html" %}
+        {%- endblock %}
 		
-        {% block content %}
-        {% endblock %}
+        {%- block content %}
+        {%- endblock %}
 
-        <div class="footer text-center">
-            this is a footer<br>
-            <a href="https://www.instagram.com/mad_meanderings/">MM Instajam</a>
-        </div>
+        {%- block footer %}
+        {%- include "blog/footer.html" %}
+        {%- endblock %}
     </div>
 </body>
 </html>

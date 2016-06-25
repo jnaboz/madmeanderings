@@ -1,0 +1,109 @@
+{%- macro render_field(field, label_visible=true) %}
+<div class="form-group">
+    {%- if (field.type != "HiddenField" and field.type != "CSRFTokenField") and label_visible %}
+    <label for="{{ field.id }}" class="form-label">{{ field.label }}</label>
+    {%- endif %}
+    <div class="input-wrap">
+        {{ field(class_="form-control", **kwargs) }}
+    </div>
+    <div class="error-wrap">
+        {%- if field.errors %}
+            {%- for e in field.errors %}
+            <p class="help-block">{{ e }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+</div>
+{%- endmacro %}
+
+{%- macro render_checkbox_field(field) %}
+<div class="form-group">
+    <label for="{{ field.id }}" class="form-label">{{ field.label }}</label>
+    <div class="checkbox input-wrap">
+        {{ field(type="checkbox", class_="checkbox", **kwargs) }}
+    </div>
+    <div class="error-wrap">
+        {%- if field.errors %}
+            {%- for e in field.errors %}
+            <p class="help-block">{{ e }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+</div>
+{%- endmacro %}
+
+{%- macro render_radio_field(field) %}
+<div class="form-group">
+    {%- for value, label, _ in field.iter_choices() %}
+    <div class="radio input-wrap">
+        <label>
+            <input type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}">{{ label }}
+        </label>
+    </div>
+    {%- endfor %}
+    <div class="error-wrap">
+        {%- if field.errors %}
+            {%- for e in field.errors %}
+            <p class="help-block">{{ e }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+</div>
+{%- endmacro %}
+
+{%- macro render_dropdown_field(field) %}
+<div class="form-group dropdown">
+    <label for="{{ field.id }}" class="form-label">{{ field.label }}</label>
+    <div class="input-wrap">
+        {{ field(class_="form-control", **kwargs) }}
+    </div>
+    <div class="error-wrap">
+        {%- if field.errors %}
+            {%- for e in field.errors %}
+            <p class="help-block">{{ e }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+</div>
+{%- endmacro %}
+
+{%- macro render_date_field(field) %}
+<div class="form-group">
+    <label for="{{ field.id }}" class="form-label">{{ field.label }}</label>
+    <div class="input-wrap">
+        <input type="date" name="{{ field.name }}">
+    </div>
+    <div class="error-wrap">
+        {%- if field.errors %}
+            {%- for e in field.errors %}
+            <p class="help-block">{{ e }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+</div>
+{%- endmacro %}
+
+{%- macro render_form(form, caller, class_="", back_url="", action_url="", enctype="") %}
+<div class="form-wrap">
+    <form class="{{ class_ }}" action="{{ action_url }}" method="POST" enctype="{{ enctype }}">
+        {{ form.hidden_tag() if form.hidden_tag() }}
+        {%- for f in form %}
+            {%- if f.type == "BooleanField" %}
+                {{ render_checkbox_field(f) }}
+            {%- elif f.type == "RadioField" %}
+                {{ render_radio_field(f) }}
+            {%- elif f.type in ["SelectField", "SelectMultipleField"] %}
+                {{ render_dropdown_field(f) }}
+            {%- elif f.type in ["DateField"] %}
+                {{ render_date_field(f) }}
+            {%- else %}
+                {{ render_field(f) }}
+            {%- endif %}
+        {%- endfor %}
+        <div class="form-btn-wrap">
+            <a class="btn btn-primary" href="{{ back_url }}">Back</a>
+            <input class="btn btn-primary" type="submit" name="btn" value="Save">
+        </div>
+    </form>
+</div>
+{%- endmacro %}

@@ -1,0 +1,18 @@
+{%- block navigation %}
+		<div class="navigation-wrap">
+			<div class="nav-logo-wrap">
+                <img src="{{ url_for('static', filename='images/nav/navigation.svg') }}" id="nav-logo">
+            </div>
+			<div class="navigation">
+				<span style="vertical-align:middle;"></span>
+				<div class="text-center" id="navigation-links">
+                    <ul>
+                        <li class="nohighlight"><a href="/"><img src="{{ url_for('static', filename='images/nav/home.svg') }}"></a></li>
+                        {%- block navbar %}
+                        {%- endblock %}
+                        <li class="nohighlight"><a href="https://www.instagram.com/mad_meanderings/" target="_"><img src="{{ url_for('static', filename='images/nav/instagram.svg') }}"></a></li>
+                    </ul>
+				</div>
+			</div>
+		</div>
+{%- endblock %}

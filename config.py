@@ -8,6 +8,9 @@ SQLALCHEMY_BINDS = {
     "blogdb": SQLALCHEMY_DATABASE_URI,
 }
 
+UPLOADED_IMAGES_DEST = os.path.join(os.path.dirname(__file__), "madapp/static/uploads")
+ALLOWED_EXTENSIONS = set(["png", "jpg", "jpeg", "gif", "cr2"])
+
 CSRF_ENABLED = True
 CSRF_SESSION_KEY = "secret"
 SECRET_KEY = "secret"

@@ -1,6 +1,7 @@
+from flask_security import (UserMixin, RoleMixin)
 from madapp import db
 from sqlalchemy_utils.types import ChoiceType
-from flask_security import (UserMixin, RoleMixin)
+import datetime
 
 
 POST_STATES = {
@@ -11,7 +12,8 @@ POST_STATES = {
 roles_users = db.Table(
     "roles_users",
     db.Column("user_id", db.Integer(), db.ForeignKey("user.id")),
-    db.Column("role_id", db.Integer(), db.ForeignKey("role.id"))
+    db.Column("role_id", db.Integer(), db.ForeignKey("role.id")),
+    info={"bind_key": "blogdb"}
 )
 
 
@@ -19,8 +21,15 @@ class Role(db.Model, RoleMixin):
     __tablename__ = "role"
     __bind_key__ = "blogdb"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Unicode(50), unique=True)
-    description = db.Column(db.Unicode(100))
+    name = db.Column(db.String(50), unique=True)
+    description = db.Column(db.String(100))
+
+    def __init__(self, name, description):
+        self.name = name
+        self.description = description
+
+    def __str__(self):
+        return self.name
 
     def __repr__(self):
         return self.name
@@ -40,12 +49,19 @@ class User(db.Model, UserMixin):
     __tablename__ = "user"
     __bind_key__ = "blogdb"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Unicode(50))
-    email = db.Column(db.Unicode(100), unique=True)
-    password = db.Column(db.Unicode(100))
-    active = db.Column(db.Boolean())
+    name = db.Column(db.String(50))
+    email = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String())
+    active = db.Column(db.Boolean(), default=True)
     roles = db.relationship("Role", secondary=roles_users,
                             backref=db.backref("users", lazy="dynamic"))
+
+    def __init__(self, name, email, password, roles, active=True):
+        self.name = name
+        self.email = email
+        self.password = password
+        self.roles = roles
+        self.active = active
 
     def __repr__(self):
         return self.name
@@ -73,12 +89,20 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     post_date = db.Column(db.DateTime())
     modified_date = db.Column(db.DateTime())
-    title = db.Column(db.Unicode(100))
+    title = db.Column(db.String(100))
     state = db.Column(ChoiceType(POST_STATES))
-    tags = db.Column(db.String(100))
     trip = db.Column(db.Integer, db.ForeignKey("trip.id"))
     comments = db.relationship("Comment")
-    content = db.Column(db.Unicode())
+    content = db.Column(db.String())
+
+    def __init__(self, title, trip, content):
+        self.title = title
+        self.trip = trip
+        self.content = content
+        self.post_date = datetime.datetime.now()
+
+    def __repr__(self):
+        return self.title
 
 
 class Trip(db.Model):
@@ -100,10 +124,19 @@ class Trip(db.Model):
     __bind_key__ = "blogdb"
     id = db.Column(db.Integer, primary_key=True)
     posts = db.relationship("Post")
-    location = db.Column(db.Unicode(255), unique=True)
+    location = db.Column(db.String(255), unique=True)
     start_date = db.Column(db.DateTime())
     end_date = db.Column(db.DateTime())
     cover_image = db.Column(db.Integer, db.ForeignKey("scaledphoto.id"))
+
+    def __init__(self, location, start_date, end_date, cover_image):
+        self.location = location
+        self.start_date = start_date
+        self.end_date = end_date
+        self.cover_image = cover_image
+
+    def __repr__(self):
+        return self.location
 
 
 class Comment(db.Model):
@@ -120,8 +153,16 @@ class Comment(db.Model):
     __bind_key__ = "blogdb"
     id = db.Column(db.Integer, primary_key=True)
     post = db.Column(db.Integer, db.ForeignKey("post.id"))
-    content = db.Column(db.Unicode(1000))
+    content = db.Column(db.String(10000))
     user = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+    def __init__(self, post, content, user):
+        self.post = post
+        self.content = content
+        self.user = user
+
+    def __repr__(self):
+        return "{0}: {1}".format(self.post.name, self.content[:25])
 
 
 class Photo(db.Model):
@@ -140,7 +181,15 @@ class Photo(db.Model):
     __bind_key__ = "blogdb"
     id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(255), unique=True)
+    description = db.Column(db.String(255))
     scaledphotos = db.relationship("ScaledPhoto")
+
+    def __init__(self, filename, description=""):
+        self.filename = filename
+        self.description = description
+
+    def __repr__(self):
+        return self.filename
 
 
 class ScaledPhoto(db.Model):
@@ -165,3 +214,33 @@ class ScaledPhoto(db.Model):
     topoff = db.Column(db.Integer)
     leftoff = db.Column(db.Integer)
     ratio = db.Column(db.String(10))
+
+    def __init__(self, photo, topoff, leftoff, ratio):
+        self.photo = photo
+        self.topoff = topoff
+        self.leftoff = leftoff
+        self.ratio = ratio
+
+    def __repr__(self):
+        return "{0}:{1}".format(self.photo.filename, self.id)
+
+
+Models = {
+    "comments": Comment,
+    "photos": Photo,
+    "posts": Post,
+    "roles": Role,
+    "scaled": ScaledPhoto,
+    "trips": Trip,
+    "users": User,
+}
+
+ATR_DISP_ORD = {
+    "comments": ["id", "user", "content"],
+    "photos": ["id", "filename"],
+    "posts": ["id", "title", "state", "post_date", "trip"],
+    "roles": ["id", "name", "description"],
+    "scaled": ["id", "photo", "leftoff", "topoff"],
+    "trips": ["id", "location", "start_date", "end_date", "posts"],
+    "users": ["id", "name", "email"],
+}
