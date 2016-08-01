@@ -123,11 +123,11 @@ class Trip(db.Model):
     __tablename__ = "trip"
     __bind_key__ = "blogdb"
     id = db.Column(db.Integer, primary_key=True)
-    posts = db.relationship("Post")
+    posts = db.relationship("Post", lazy="dynamic")
     location = db.Column(db.String(255), unique=True)
     start_date = db.Column(db.DateTime())
     end_date = db.Column(db.DateTime())
-    cover_image = db.Column(db.Integer, db.ForeignKey("scaledphoto.id"))
+    cover_image = db.Column(db.Integer, db.ForeignKey("photo.id"))
 
     def __init__(self, location, start_date, end_date, cover_image):
         self.location = location
@@ -241,6 +241,6 @@ ATR_DISP_ORD = {
     "posts": ["id", "title", "state", "post_date", "trip"],
     "roles": ["id", "name", "description"],
     "scaled": ["id", "photo", "leftoff", "topoff"],
-    "trips": ["id", "location", "start_date", "end_date", "posts"],
+    "trips": ["id", "location", "start_date", "end_date"],
     "users": ["id", "name", "email"],
 }

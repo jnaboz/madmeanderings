@@ -35,7 +35,7 @@
                                 <tr>
                                     <td><input class="checkbox" type="checkbox" name="selected" value="{{ row['id'] }}"></td>
                                     {%- for attr in attrs_order %}
-                                    <td>{{ row[attr] }}</td>
+                                    <td>{{ row[attr]|e }}</td>
                                     {%- endfor %}
                                 </tr>
                                 {%- endfor %}

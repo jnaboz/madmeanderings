@@ -12,21 +12,24 @@ body, html {
     width:      100%;
     min-height: 100%;
     margin:     auto;
-	font-family: 	"Pontano Sans", sans-serif;
+	font-family: "Open Sans", sans-serif;
+    font-weight: 300;
 	letter-spacing: 1px;
 }
 
 .navigation-wrap {
     display:    block;
-    width:      100%;
+    width:      98%;
+    margin:     0 auto;
     z-index:    11;
     padding-bottom: 10px;
+    font-family: "Dream Orphans", sans-serif;
 }
 
 .nav-logo-wrap {
     width: 100%;
     text-align: center;
-    padding: 25px 0;
+    padding: 45px 0 35px 0;
 }
 
 #nav-logo {
@@ -38,7 +41,7 @@ body, html {
     width:      	100%;
     margin:     	auto;
     font-size:  	.9em;
-	letter-spacing: 2px;
+	letter-spacing: 3px;
 	left:			0;
 	right:			0;
 	background-color: white;
@@ -46,21 +49,24 @@ body, html {
 
 .navigation a {
     padding: 0 20px;
+    margin: 0;
 	line-height: 18px;
     vertical-align: middle;
     text-decoration: none;
+    border-right: solid thin #781000;
 }
 
 .navigation a:link,
 .navigation a:visited,
 .navigation a:focus,
 .navigation a:active {
-    color: #808285;
+    color: #781000;
     text-decoration: none; 
 }
 
 .navigation a:hover {
-    color:  #202020;
+    /*color:  #202020;*/
+    text-decoration: underline;
     cursor: pointer;
 }
 
@@ -80,7 +86,7 @@ body, html {
 	z-index: 11;
 	line-height: 20px;
 	vertical-align: middle;
-	font-weight: bold;
+	font-weight: 600;
 }
 
 #navigation-links li {
@@ -88,10 +94,16 @@ body, html {
     vertical-align: middle;
     transition: .3s background-color;
     padding: 10px 0;
+    margin: 0;
+}
+
+.noborders {
+    border-right: none !important;
 }
 
 #navigation-links li:hover {
-    background-color: #e0e0e0;
+    /*background-color: rgba(0, 0, 0, .05);*/
+    /*background-color: #e0e0e0;*/
 }
 
 #navigation-links ul {
@@ -106,7 +118,8 @@ body, html {
     display: none;
     width: inherit;
     margin-top: 10px;
-    background-color: #e0e0e0;
+    transition: .2s display;
+    background-color: rgba(240, 240, 240, .80);
 }
 
 #navigation-links li ul a {
@@ -117,6 +130,10 @@ body, html {
     display: block;
     margin: 5px 0;
     height: auto;
+}
+
+#navigation-links li ul li:hover {
+    background-color: transparent;
 }
 
 #navigation-links li:hover ul {
@@ -153,7 +170,7 @@ body, html {
 
 .section-wrap {
 	width:	900px;
-	margin: auto;
+	margin: 35px auto 0 auto;
     padding-bottom: 64px;
 }
 
@@ -161,25 +178,85 @@ body, html {
     display:    block;
     position:   relative;
     margin:     10px 0 25px 0;
-	height:		500px;
+	height:		auto;
 }
 
 .section-title {
 	color: #555555;
 	font-size: 1.4em;
-	margin-bottom: 10px;
-	font-weight: bold;
+	font-weight: 400;
 	letter-spacing: 2px;
+    font-family: "Dream Orphans", sans-serif;
+    /*text-align: center;*/
+}
+
+.page-title {
+    text-align: center;
 }
 
 .title-date {
 	color: #808285;
-	font-size: .6em;
-	font-weight: normal;
+	font-size: .7em;
+	font-weight: 400;
+    font-family: "Open Sans", sans-serif;
 }
 
 .section-content {
+    margin: 25px 0;
 	color: #808285;
+}
+
+.post-preview-wrap {
+    display:    block;
+    position:   relative;
+    width:      100%;
+    border:     solid thin black;
+    margin:     10px 0;
+}
+
+.post-preview-location {
+    padding:    10px;
+}
+
+.post-preview-title {
+    padding:    5px 10px;
+    border-top: solid thin black;
+}
+
+.post-preview-content {
+    padding:    10px;
+    border-top: solid thin black;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.trip-preview-wrap {
+    display:    block;
+    position:   relative;
+    width:      100%;
+    border:     solid thin black;
+    margin:     10px 0;
+}
+
+.trip-preview-location {
+    padding:    10px;
+}
+
+.trip-location {
+    padding:    0 10px;
+}
+
+.trip-post-preview {
+    margin-top: 20px;
+}
+
+.trip-photo-block {
+    max-height: 250px;
+    overflow: hidden;
+}
+
+.trip-photo-block img {
+    width: 100%;
 }
 
 .footer {
@@ -190,4 +267,30 @@ body, html {
     width:      100%;
     font-size:  0.8em;
     background-color:   darkgray;
+}
+
+.mad-link,
+.mad-link:link,
+.mad-link:visited,
+.mad-link:focus,
+.mad-link:active {
+    color: inherit;
+    text-decoration: none; 
+}
+
+.mad-link:hover {
+    cursor: pointer;
+}
+
+.read-more-wrap {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.read-more {
+    color: #00004d !important;
+}
+
+.read-more:hover {
+    background-color: rgba(204, 204, 255, 0.4) !important;
 }

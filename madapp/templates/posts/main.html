@@ -1,12 +1,28 @@
 {% extends "base.html" %}
 
-{% block content %}
+{%- block content %}
         <div class="section-wrap">
+            {%- for post in posts %}
             <div class="section text-justify">
-                <div class="section-title"><span class="title-date">Some Date</span>POST-TITLE</div>
-				<div class="section-content">
-                    THIS IS A POST
-				</div>
+                <div class="section-content">
+                    <div class="post-preview-wrap">
+                        <div class="post-preview-location">
+                            <a class="mad-link" href="/trips/{{ post.trip }}">{{ post|get_post_trip_location }}</a>
+                        </div>
+                        <div class="post-preview-title">
+                            <a class="mad-link" href="/posts/{{ post.id }}">
+                                <div class="section-title">{{ post.title }} | <span class="title-date">{{ post.post_date.strftime("%Y.%m.%d") }}</span></div>
+                            </a>
+                        </div>
+                        <div class="post-preview-content">
+                            {{- post.content[:500]|markdown|striptags|e }}</br>
+                            <div class="read-more-wrap">
+                                <a class="mad-link read-more" href="/posts/{{ post.id }}">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            {%- endfor %}
         </div>
-{% endblock %}
+{%- endblock %}

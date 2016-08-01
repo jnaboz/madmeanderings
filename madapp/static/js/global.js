@@ -6,6 +6,7 @@ $(document).ready(function(){
     /* Initialization                                                           */
     /* ------------------------------------------------------------------------ */
 	var NAVTOP = $("#navigation-links").position().top;
+    var NAVH = $(".navigation-wrap").height();
 	
     /* ------------------------------------------------------------------------ */
     /* Events                                                                   */
@@ -13,12 +14,15 @@ $(document).ready(function(){
     $(document).scroll(function(){
         var pos = $(document).scrollTop();
 		var $nav = $("#navigation-links");
+        var $navall = $(".navigation-wrap");
         if(pos > NAVTOP){
 			$nav.css("position","fixed");
 			$nav.css("top","0");
 			$nav.css("left","0");
+            $navall.height(NAVH);
         } else {
 			$nav.css("position", "relative");
+            $navall.height("");
         }
     });
 

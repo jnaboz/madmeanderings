@@ -40,7 +40,8 @@ def admin_display(admin_type):
             for item in selected:
                 Models[admin_type.lower()].query.filter_by(id=item).delete()
             db.session.commit()
-        if request.form['btn'].lower() in ['modify']:
+        elif request.form['btn'].lower() in ['modify']:
+            item = selected[0]
             return redirect(url_for("admin_bp.modify_entry",
                                     admin_type=admin_type,
                                     element_id=item))
@@ -74,12 +75,26 @@ def create_new(admin_type):
 
 
 @admin_bp.route("/<admin_type>/modify/<element_id>", methods=["GET", "POST"])
-def element_modify(admin_type, element_id):
+def modify_entry(admin_type, element_id):
     if not is_accessible():
         return redirect(url_for("security.login", next=request.url))
-    if request.method == "POST":
-        pass
-    return render_template("admin/modify".format(admin_type))
+    obj = Models[admin_type.lower()].query.filter_by(id=element_id).first()
+    if obj is None:
+        abort(404)
+    form = AdminForms[admin_type.lower()](obj=obj)
+    if form.validate_on_submit():
+        form.populate_obj(obj)
+        db.session.commit()
+        return redirect(url_for("admin_bp.modify_entry",
+                                admin_type=admin_type,
+                                element_id=element_id))
+    enct = ""
+    if admin_type.lower() in ["photos"]:
+        enct = "multipart/form-data"
+    return render_template("admin/add.html",
+                           admin_form=form,
+                           admin_type=admin_type,
+                           enctype=enct)
 
 
 @admin_bp.errorhandler(404)

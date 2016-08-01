@@ -1,12 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-        <div class="section-wrap">
+        <div class="section-wrap trip-overview">
+            {%- for trip in trips %}
             <div class="section text-justify">
-                <div class="section-title"><span class="title-date"></span>TRIP</div>
-				<div class="section-content">
-                    This is a trip
-				</div>
+                <div class="section-content">
+                    <div class="trip-preview-wrap">
+                        <div class="section-title trip-preview-location">
+                            <a class="mad-link" href="/trips/{{ trip.id }}">{{ trip.location }}</a>
+                        </div>
+                        {%- for post in trip.posts[:2] %}
+                        <div class="trip-post-preview">
+                            <div class="post-preview-wrap">
+                                <div class="post-preview-title">
+                                    <a class="mad-link" href="/posts/{{ post.id }}">
+                                        <div>{{ post.title }} | <span class="title-date">{{ post.post_date.strftime("%Y.%m.%d") }}</span></div>
+                                    </a>
+                                </div>
+                                <div class="post-preview-content">
+                                    {{- post.content[:500]|markdown|striptags|e }}</br>
+                                    <div class="read-more-wrap">
+                                        <a class="mad-link read-more" href="/posts/{{ post.id }}">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {%- endfor %}
+                    </div>
+                </div>
             </div>
+            {%- endfor %}
         </div>
 {% endblock %}

@@ -63,7 +63,9 @@ def upload_photo(form):
     if filename:
         form.image.data.save(os.path.join(UPLOADED_IMAGES_DEST, filename))
         photo = Photo(filename, form.description.data)
+        sphoto = ScaledPhoto(photo.id, 0, 0, 1)
         db.session.add(photo)
+        db.session.add(sphoto)
         db.session.commit()
     else:
         pass

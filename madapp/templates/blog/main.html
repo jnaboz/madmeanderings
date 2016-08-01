@@ -3,17 +3,41 @@
 {% block content %}
         <div class="section-wrap">
             <div class="section text-justify">
-                <div class="section-title"><span class="title-date">MAY 15, 2016 | </span>TITLE</div>
-				<div class="section-content">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-					in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-					sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</div>
+                <div class="section-title">RECENT TRIPS</div>
+                {%- for trip in recent_trips %}
+                <div class="trip-preview-wrap">
+                    <div class="section-title trip-preview-location">
+                        <a class="mad-link" href="/trips/{{ trip.id }}">{{ trip.location }}</a>
+                    </div>
+                    <div class="trip-photo-block">
+                        <img src="{{ url_for('static', filename=trip.cover_image|get_photo_filename()) }}">
+                    </div>
+                </div>
+                {%- endfor %}
             </div>
+        </div>
 
+        <div class="section-wrap">
             <div class="section text-justify">
-                THIS IS A BLOG
+                <div class="section-title">RECENT POSTS</div>
+                {%- for post in recent_posts %}
+                <div class="post-preview-wrap">
+                    <div class="post-preview-location">
+                        <a class="mad-link" href="/trips/{{ post.trip }}">{{ post|get_post_trip_location }}</a>
+                    </div>
+                    <div class="post-preview-title">
+                        <a class="mad-link" href="/posts/{{ post.id }}">
+                            <div>{{ post.title }} | <span class="title-date">{{ post.post_date.strftime("%Y.%m.%d") }}</span></div>
+                        </a>
+                    </div>
+                    <div class="post-preview-content">
+                        {{- post.content[:500]|markdown|striptags|e }}</br>
+                        <div class="read-more-wrap">
+                            <a class="mad-link read-more" href="/posts/{{ post.id }}">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                {%- endfor %}
             </div>
         </div>
 {% endblock %}

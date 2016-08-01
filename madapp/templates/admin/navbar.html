@@ -1,30 +1,30 @@
 {%- extends "navigation.html" %}
 {%- block navbar %}
                     {%- if current_user.is_authenticated and current_user.has_role("sysadmin") %}
-                    <li><a href="/admin/users">USERS</a>
+                    <a href="/admin/users">USERS</a>
                         <ul>
-                            <li><a href="/admin/roles">ROLES</a></li>
+                            <li><a class="noborders" href="/admin/roles">ROLES</a></li>
                         </ul>
-                    </li>
-					<li><a href="/admin/trips">TRIPS</a>
+                    </li><li>
+					<a href="/admin/trips">TRIPS</a>
                         <ul>
-                            <li><a href="/admin/trips/add">CREATE NEW TRIP</a></li>
+                            <li><a class="noborders" href="/admin/trips/add">CREATE NEW TRIP</a></li>
                         </ul>
-                    </li>
-					<li><a href="/admin/posts">POSTS</a>
+                    </li><li>
+					<a href="/admin/posts">POSTS</a>
                         <ul>
-                            <li><a href="/admin/posts/add">WRITE NEW POST</a></li>
+                            <li><a class="noborders" href="/admin/posts/add">WRITE NEW POST</a></li>
                         </ul>
-                    </li>
-					<li><a href="/admin/comments">COMMENTS</a>
-                    </li>
-					<li><a href="/admin/photos">PHOTOS</a>
+                    </li><li>
+					<a href="/admin/comments">COMMENTS</a>
+                    </li><li>
+					<a href="/admin/photos">PHOTOS</a>
                         <ul>
-                            <li><a href="/admin/scaled">SCALED PHOTOS</a></li>
-                            <li><a href="/admin/photos/add">UPLOAD FILES</a></li>
+                            <li><a class="noborders" href="/admin/scaled">SCALED PHOTOS</a></li>
+                            <li><a class="noborders" href="/admin/photos/add">UPLOAD FILES</a></li>
                         </ul>
-                    </li>
+                    </li><li>
                     {%- else %}
-                    <li>PLEASE LOG IN</li>
+                    PLEASE LOG IN</li><li>
                     {%- endif %}
 {%- endblock %}

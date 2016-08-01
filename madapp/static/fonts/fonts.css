@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Dream Orphans';
+  src: url('dream_orphans/dream orphans.woff2') format('woff2'),
+       /* url('dream orphans bd.woff2') format('woff2'), /* Pretty Modern Browsers */
+       /* url('dream orphans it.woff2') format('woff2'), /* Pretty Modern Browsers */
+       /* url('dream orphans bd it.woff2') format('woff2'), /* Pretty Modern Browsers */
+
+       url('dream_orphans/dream_orphans.woff') format('woff'), /* Pretty Modern Browsers */
+       /* url('dream orphans bd.WOFF') format('woff'), /* Pretty Modern Browsers */
+       /* url('dream orphans it.WOFF') format('woff'), /* Pretty Modern Browsers */
+       /* url('dream orphans bd it.WOFF') format('woff'), /* Pretty Modern Browsers */
+
+       url('dream_orphans/dream orphans.ttf')  format('truetype'); /* Safari, Android, iOS */
+       /* url('dream orphans bd.ttf')  format('truetype'), /* Safari, Android, iOS */
+       /* url('dream orphans it.ttf')  format('truetype'), /* Safari, Android, iOS */
+       /* url('dream orphans bd it.ttf')  format('truetype'), /* Safari, Android, iOS */
+}

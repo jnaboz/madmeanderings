@@ -1,0 +1,26 @@
+{%- extends "base.html" %}
+
+{%- block content %}
+        <div class="section-wrap">
+            <div class="section text-justify trip-wrapper" style="border: solid thin black;">
+                <div class="section-title trip-location" style="margin:25px 0;">{{ trip_data.location }}</div>
+                {%- for post in trip_data.posts %}
+				<div class="section-content" style="margin:25px 0; width:100%;">
+                    <div class="post-box-wrap">
+                        <div class="post-box">
+                            <a class="mad-link" href="/posts/{{ post.id }}">
+                                <div class="post-box-title" style="font-size:20px; font-weight:400; padding: 5px; border-bottom: solid thin lightgray;">{{ post.title }}</div>
+                            </a>
+                            <div class="post-box-preview" style="padding: 10px 5px;">
+                                {{ post.content[:1000]|markdown|striptags|e }}<br>
+                                <div class="read-more-wrap">
+                                    <a class="mad-link read-more" href="/posts/{{ post.id }}">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+                {%- endfor %}
+            </div>
+        </div>
+{%- endblock %}
