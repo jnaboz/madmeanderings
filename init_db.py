@@ -10,8 +10,8 @@ db.session.add(admin_role)
 db.session.add(author_role)
 db.session.commit()
 
-db.session.add(User(name="admin",
-                    email="admin",
-                    password="Kj200817JrnJn0825Kb",
+db.session.add(User(name="username",
+                    email="username",
+                    password="password",
                     roles=[admin_role, author_role]))
 db.session.commit()
